@@ -1,4 +1,4 @@
-package sideOutput
+package flinkTest
 
 import java.time.Duration
 
@@ -14,7 +14,7 @@ import org.apache.flink.util.Collector
 /**
  * @Auther: wxf
  * @Date: 2022/9/1 14:41:56
- * @Description: SideOutput_AllowedLateness_Test
+ * @Description: SideOutput_AllowedLateness_Test   测试 侧输出流与处理延迟数据效果
  * @Version 1.0.0
  */
 object SideOutput_AllowedLateness_Test {
@@ -42,7 +42,7 @@ object SideOutput_AllowedLateness_Test {
 
     val result: DataStream[(String, Long, Long, Double)] = mapStream.keyBy(x => x.id)
       .window(TumblingEventTimeWindows.of(Time.seconds(5)))
-      .allowedLateness(Time.seconds(1)) // 允许 2 秒 迟到
+      .allowedLateness(Time.seconds(1)) // 允许 1 秒 迟到
       .sideOutputLateData(lateOutputTag)
       .process(new MyProcessWindowFunction())
 
@@ -63,6 +63,7 @@ class MyProcessWindowFunction extends ProcessWindowFunction[Sensor, (String, Lon
     for (elem <- elements) {
       max = Math.max(elem.temperature, max)
     }
+    //    println("当前 waterMark： " + context.currentWatermark)
     out.collect((key, context.window.getStart, context.window.getEnd, max))
   }
 }
