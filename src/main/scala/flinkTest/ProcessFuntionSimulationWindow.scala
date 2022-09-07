@@ -6,7 +6,7 @@ import bean.Sensor
 import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
 import org.apache.flink.api.common.state.{MapState, MapStateDescriptor, ValueState, ValueStateDescriptor}
 import org.apache.flink.api.common.time.Time
-import org.apache.flink.configuration.Configuration
+import org.apache.flink.configuration.{Configuration, RestOptions}
 import org.apache.flink.streaming.api.{CheckpointingMode, TimerService}
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction
 import org.apache.flink.streaming.api.scala._
@@ -20,8 +20,14 @@ import org.apache.flink.util.Collector
  */
 object ProcessFuntionSimulationWindow {
   def main(args: Array[String]): Unit = {
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
-    env.setParallelism(1)
+
+    // 开启 web 支持
+    val conf: Configuration = new Configuration()
+    conf.setInteger(RestOptions.PORT, 8081)
+    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
+
+    //    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+    //    env.setParallelism(1)
     // 设置 waterMark 生成周期
     env.getConfig.setAutoWatermarkInterval(500L)
 
@@ -31,7 +37,7 @@ object ProcessFuntionSimulationWindow {
         override def extractTimestamp(element: Sensor, recordTimestamp: Long): Long = element.timeStamp
       })
 
-    val socketStream: DataStream[String] = env.socketTextStream("localhost", 6666)
+    val socketStream: DataStream[String] = env.socketTextStream("localhost", 7777)
     val mapStream: DataStream[Sensor] = socketStream.map(x => {
       val str: Array[String] = x.split(" ")
       Sensor(str(0), str(1).toLong * 1000, str(2).toDouble)
