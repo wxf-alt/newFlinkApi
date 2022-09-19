@@ -1,13 +1,13 @@
-package flinkTest
+package flinkTest.test
 
 import java.time.Duration
 
 import bean.Sensor
 import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
-import org.apache.flink.api.common.state.{MapState, MapStateDescriptor, ValueState, ValueStateDescriptor}
+import org.apache.flink.api.common.state.{MapState, MapStateDescriptor}
 import org.apache.flink.api.common.time.Time
 import org.apache.flink.configuration.{Configuration, RestOptions}
-import org.apache.flink.streaming.api.{CheckpointingMode, TimerService}
+import org.apache.flink.streaming.api.TimerService
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.util.Collector
@@ -15,7 +15,8 @@ import org.apache.flink.util.Collector
 /**
  * @Auther: wxf
  * @Date: 2022/9/1 20:35:29
- * @Description: ProcessFuntionSimulationWindow  使用 Process Function 模拟 window。计算 每5秒内每个传感器的温度总和。并且处理迟到数据 侧输出
+ * @Description: ProcessFuntionSimulationWindow
+ *              使用 Process Function 模拟 window。计算 每5秒内每个传感器的温度总和。并且处理迟到数据 侧输出
  * @Version 1.0.0
  */
 object ProcessFuntionSimulationWindow {

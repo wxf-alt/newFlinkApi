@@ -1,4 +1,4 @@
-package flinkTest
+package flinkTest.test
 
 import java.time.Duration
 
@@ -8,13 +8,14 @@ import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.windowing.windows.{TimeWindow}
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
 
 /**
  * @Auther: wxf
  * @Date: 2022/9/1 14:41:56
- * @Description: SideOutput_AllowedLateness_Test   测试 侧输出流与处理延迟数据效果
+ * @Description: SideOutput_AllowedLateness_Test
+ *              测试 侧输出流与处理延迟数据效果
  * @Version 1.0.0
  */
 object SideOutput_AllowedLateness_Test {

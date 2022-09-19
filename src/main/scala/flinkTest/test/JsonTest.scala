@@ -1,4 +1,4 @@
-package flinkTest
+package flinkTest.test
 
 import bean.Sensor
 import com.alibaba.fastjson.JSON
@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON
  * @Description: Test
  * @Version 1.0.0
  */
-object Test2 {
+object JsonTest {
   def main(args: Array[String]): Unit = {
     //    // 随机数
     //    val random: Random = new Random()

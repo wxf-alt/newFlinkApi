@@ -15,7 +15,7 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.12.8</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!--    MySql   -->
@@ -23,45 +23,91 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
-
+        <!--Flink-->
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-core</artifactId>
+            <version>1.15.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-scala_2.12</artifactId>
+            <version>1.14.5</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_2.12</artifactId>
-            <version>1.14.5</version>
-            <scope>provided</scope>
+            <artifactId>flink-clients</artifactId>
+            <version>1.15.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-clients_2.12</artifactId>-->
+        <!--            <version>1.14.5</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-runtime-web_2.12</artifactId>
+            <version>1.14.5</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.12</artifactId>
             <version>1.15.2</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-api-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-scala_2.12</artifactId>
             <version>1.15.2</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-api-scala-bridge -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-scala-bridge_2.12</artifactId>
             <version>1.15.2</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-table-planner_2.12</artifactId>-->
-<!--            <version>1.15.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-queryable-state-client-java</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-statebackend-rocksdb</artifactId>
+            <version>1.15.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-connector-kafka_2.12</artifactId>-->
+        <!--            <version>1.15.2</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-table-planner_2.12</artifactId>-->
+        <!--            <version>1.15.2</version>-->
+        <!--        </dependency>-->
+
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -74,53 +120,46 @@
             <version>3.5.3</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <version>1.7.5</version>-->
-<!--        </dependency>-->
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
+            <!-- 打包插件, 否则 scala 类不会编译并打包进去 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.1</version>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.4.6</version>
                 <executions>
                     <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>com.google.code.findbugs:jsr305</exclude>
-                                </excludes>
-                            </artifactSet>
-                            <filters>
-                                <filter>
-                                    <!-- Do not copy the signatures in the META-INF folder.
-                                    Otherwise, this might cause SecurityExceptions when using the JAR. -->
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <!-- Replace this with the main class of your job -->
-                                    <mainClass>my.programs.main.clazz</mainClass>
-                                </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                            </transformers>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
