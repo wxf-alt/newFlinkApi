@@ -13,7 +13,7 @@ import org.apache.flink.streaming.api.scala._
  * @Description: a2_readFile  定期读取文件.可以使用过滤 只读取关闭的文件
  * @Version 1.0.0
  */
-object a2_ReadFileTest {
+object A2_ReadFileTest {
   def main(args: Array[String]): Unit = {
     val conf: Configuration = new Configuration()
     conf.setInteger(RestOptions.PORT, 8888)

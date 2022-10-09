@@ -17,7 +17,7 @@ import org.apache.flink.util.Collector
  *              主流输入 传感器数据，广播流传入(传感器id,温度值)   输出当前传感器id的温度 小于 广播流设定的规则的温度值
  * @Version 1.0.0
  */
-object a10_BroadcastStateTest extends App {
+object A10_BroadcastStateTest extends App {
 
   val conf: Configuration = new Configuration()
   conf.setInteger(RestOptions.PORT, 8081)

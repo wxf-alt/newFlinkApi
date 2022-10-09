@@ -18,7 +18,7 @@ import org.apache.flink.streaming.api.scala._
  * @Description: getEnvAndOutText   获取 运行环境 并输出文件
  * @Version 1.0.0
  */
-object a1_GetEnvAndOutText {
+object A1_GetEnvAndOutText {
   def main(args: Array[String]): Unit = {
 
     //    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

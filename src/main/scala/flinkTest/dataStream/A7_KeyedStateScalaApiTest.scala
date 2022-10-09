@@ -17,7 +17,7 @@ import org.apache.flink.util.Collector
  *              每三次计算一次平均温度
  * @Version 1.0.0
  */
-object a7_KeyedStateScalaApiTest extends App {
+object A7_KeyedStateScalaApiTest extends App {
   val conf: Configuration = new Configuration()
   conf.setInteger(RestOptions.PORT, 8081)
   val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)

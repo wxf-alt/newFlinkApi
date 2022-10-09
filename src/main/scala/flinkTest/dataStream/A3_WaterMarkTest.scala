@@ -13,7 +13,7 @@ import org.apache.flink.streaming.api.scala._
  * @Description: a3_waterMarkTest   设置 WaterMark
  * @Version 1.0.0
  */
-object a3_WaterMarkTest {
+object A3_WaterMarkTest {
   def main(args: Array[String]): Unit = {
     val conf: Configuration = new Configuration()
     conf.setInteger(RestOptions.PORT, 8888)

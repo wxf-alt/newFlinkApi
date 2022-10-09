@@ -16,7 +16,7 @@ import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironm
  * @Description: a12_QueryStateTest  读取 Flink 保存的状态
  * @Version 1.0.0
  */
-object a12_QueryStateClient {
+object A12_QueryStateClient {
   def main(args: Array[String]): Unit = {
 
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

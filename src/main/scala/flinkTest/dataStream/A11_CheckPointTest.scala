@@ -14,7 +14,7 @@ import org.apache.flink.streaming.api.scala._
  * @Description: a11_checkPointTest   设置 checkPoint
  * @Version 1.0.0
  */
-object a11_CheckPointTest {
+object A11_CheckPointTest {
   def main(args: Array[String]): Unit = {
 
     val conf: Configuration = new Configuration()

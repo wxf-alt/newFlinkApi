@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.scala._
  * @Description: a13_StateBackendTest  设置状态后端
  * @Version 1.0.0
  */
-object a13_StateBackendTest {
+object A13_StateBackendTest {
   def main(args: Array[String]): Unit = {
     val conf: Configuration = new Configuration()
     conf.setInteger(RestOptions.PORT, 8081)

@@ -21,7 +21,7 @@ import org.apache.flink.streaming.api.windowing.time.Time
  *              多个分区 取上游任务的最小 WaterMark
  * @Version 1.0.0
  */
-object a3_WaterMarkTransmitTest {
+object A3_WaterMarkTransmitTest {
   def main(args: Array[String]): Unit = {
     val conf: Configuration = new Configuration()
     conf.setInteger(RestOptions.PORT, 8081)
