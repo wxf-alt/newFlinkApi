@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat
 import java.time.Duration
 import java.util.Date
 
-import flinkTest.dataStream.t1_operators.A5_ReduceTest.filterFuntion
 import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
 import org.apache.flink.configuration.{Configuration, RestOptions}
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction
@@ -56,6 +55,9 @@ object A10_IntervalJoinTest {
         })
       )
       .keyBy(_._1)
+
+    keyedStream1.print()
+    keyedStream2.print()
 
     // key1 == key2 && leftTs - 2 < rightTs < leftTs + 2
     // key值相等；并且 右边的数据时间戳 要在 左边数据时间戳 +- 指定的上下界之间

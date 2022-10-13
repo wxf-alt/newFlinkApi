@@ -35,7 +35,15 @@ object A7_CustomTriggerTest {
   case class CustomTrigger() extends Trigger[(String, Int), TimeWindow] {
 
     // 输入一个元素  什么都不做
-    override def onElement(element: (String, Int), timestamp: Long, window: TimeWindow, ctx: Trigger.TriggerContext): TriggerResult = TriggerResult.CONTINUE
+    // Trigger 还可以在 window 被创建后、删除前的这段时间内定义 清理（purge）窗口中的数据
+    override def onElement(element: (String, Int), timestamp: Long, window: TimeWindow, ctx: Trigger.TriggerContext): TriggerResult = {
+      if (element._1 == "aa") {
+        TriggerResult.PURGE
+      } else {
+        TriggerResult.CONTINUE
+      }
+      //      TriggerResult.CONTINUE
+    }
 
     // 方法在注册的 processing-time timer 触发时调用
     override def onProcessingTime(time: Long, window: TimeWindow, ctx: Trigger.TriggerContext): TriggerResult = TriggerResult.FIRE

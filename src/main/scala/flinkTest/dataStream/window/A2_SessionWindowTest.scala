@@ -21,11 +21,11 @@ object A2_SessionWindowTest {
     val inputStream: DataStream[String] = env.socketTextStream("localhost", 6666)
     val keyedStream: KeyedStream[(String, Int), String] = inputStream.map((_, 1)).keyBy(_._1)
 
-    // 5秒 超时会话设置
+    // 如果输入 aa 活跃间隔为5秒;其他情况 2分钟
     //    val windowStream: DataStream[(String, Int)] = keyedStream.window(ProcessingTimeSessionWindows.withGap(Time.seconds(5)))
     // 设置了动态间隔的 processing-time 会话窗口
     val windowStream: DataStream[(String, Int)] = keyedStream.window(ProcessingTimeSessionWindows.withDynamicGap(new SessionWindowTimeGapExtractor[(String, Int)] {
-      override def extract(element: (String, Int)): Long = if (element._1 == "aa") 5 * 1000 else 2 * 60 * 100
+      override def extract(element: (String, Int)): Long = if (element._1 == "aa") 5 * 1000 else 2 * 60 * 1000
     }))
       .reduce((x, y) => (x._1, x._2 + y._2))
 

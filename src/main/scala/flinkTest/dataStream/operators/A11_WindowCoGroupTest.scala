@@ -16,7 +16,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * @Auther: wxf
  * @Date: 2022/10/10 14:34:07
- * @Description: A11_WindowCoGroupTest
+ * @Description: A11_WindowCoGroupTest  模拟 左/右 连接
  * @Version 1.0.0
  */
 object A11_WindowCoGroupTest {
