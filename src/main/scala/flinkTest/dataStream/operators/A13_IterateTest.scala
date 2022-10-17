@@ -29,7 +29,8 @@ object A13_IterateTest {
     val mapStream: DataStream[(String, Int)] = inputStream1.map(x => {
       val str: Array[String] = x.split(" ")
       (str(0), str(1).toInt)
-    }).disableChaining
+    })
+//      .disableChaining
 
     val iterateStream: DataStream[(String, Int)] = mapStream.iterate(iteration => {
       // 窗口求和
@@ -37,8 +38,9 @@ object A13_IterateTest {
         .window(TumblingProcessingTimeWindows.of(Time.seconds(5)))
         .reduce((x, y) => (x._1, x._2 + y._2))
       // 反馈分支：窗口输出数据小于 500，反馈到 mapStream，重新窗口求和
-      (sumStream.filter(_._2 <= 500), sumStream.filter(_._2 > 500))
-    }).disableChaining()
+      (sumStream.filter(_._2 < 500), sumStream.filter(_._2 >= 500))
+    })
+//      .disableChaining()
 
     iterateStream.print()
     env.executeAsync("A13_IterateTest")

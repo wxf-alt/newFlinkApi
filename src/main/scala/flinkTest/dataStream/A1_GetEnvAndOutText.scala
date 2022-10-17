@@ -1,5 +1,6 @@
 package flinkTableApi.test
 
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 import org.apache.flink.api.common.{JobExecutionResult, RuntimeExecutionMode}
@@ -11,6 +12,7 @@ import org.apache.flink.core.fs.Path
 import org.apache.flink.streaming.api.functions.sink.filesystem.{OutputFileConfig, StreamingFileSink}
 import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.DefaultRollingPolicy
 import org.apache.flink.streaming.api.scala._
+
 
 /**
  * @Auther: wxf
@@ -35,18 +37,17 @@ object A1_GetEnvAndOutText {
     val mapStream: DataStream[String] = text.map(x => {
       val str: Array[String] = x.split("=")
       str(0)
-    })
-    mapStream.print("mapStream：")
+    }).setParallelism(4)
 
     val outputFileConfig: OutputFileConfig = OutputFileConfig.builder().withPartPrefix("prefix").withPartSuffix(".txt").build()
     // 输出
-    val fileSink: StreamingFileSink[String] = StreamingFileSink.forRowFormat(new Path("E:\\A_data\\3.code\\newFlinkApi\\src\\main\\resources\\SinkOut1"), new SimpleStringEncoder[String]("UTF-8"))
+    val fileSink: StreamingFileSink[String] = StreamingFileSink.forRowFormat(new Path("./SinkOut1"), new SimpleStringEncoder[String]("UTF-8"))
       .withOutputFileConfig(outputFileConfig)
       .withRollingPolicy(DefaultRollingPolicy.builder()
-        .withInactivityInterval(TimeUnit.MINUTES.toMillis(1)) // 2毫秒秒 滚动一次
+        //        .withInactivityInterval(TimeUnit.MINUTES.toMillis(1)) // 1f分钟 滚动一次
+        .withInactivityInterval(Duration.ofMinutes(1)) // 1分钟 滚动一次
         .withRolloverInterval(TimeUnit.MINUTES.toMillis(1))
-        //        .withMaxPartSize(1024 * 1024 * 1024)
-        .withMaxPartSize(1024)
+        .withMaxPartSize(1024 * 1024 * 1024)
         .build())
       .build()
     mapStream.addSink(fileSink)
