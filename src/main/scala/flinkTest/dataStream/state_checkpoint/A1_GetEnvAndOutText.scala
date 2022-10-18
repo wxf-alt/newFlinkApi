@@ -1,16 +1,14 @@
-package flinkTableApi.test
+package flinkTest.dataStream.state_checkpoint
 
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
-import org.apache.flink.api.common.{JobExecutionResult, RuntimeExecutionMode}
+import org.apache.flink.api.common.JobExecutionResult
 import org.apache.flink.api.common.serialization.SimpleStringEncoder
 import org.apache.flink.configuration.{Configuration, RestOptions}
-import org.apache.flink.core.execution.JobClient
-import org.apache.flink.core.fs.FileSystem.WriteMode
 import org.apache.flink.core.fs.Path
-import org.apache.flink.streaming.api.functions.sink.filesystem.{OutputFileConfig, StreamingFileSink}
 import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.DefaultRollingPolicy
+import org.apache.flink.streaming.api.functions.sink.filesystem.{OutputFileConfig, StreamingFileSink}
 import org.apache.flink.streaming.api.scala._
 
 

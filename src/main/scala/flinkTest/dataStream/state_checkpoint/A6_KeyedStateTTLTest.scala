@@ -1,7 +1,7 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
-import org.apache.flink.api.common.functions.{IterationRuntimeContext, RichFlatMapFunction}
+import org.apache.flink.api.common.functions.RichFlatMapFunction
 import org.apache.flink.api.common.state.StateTtlConfig.{StateVisibility, UpdateType}
 import org.apache.flink.api.common.state.{StateTtlConfig, ValueState, ValueStateDescriptor}
 import org.apache.flink.api.common.time.Time

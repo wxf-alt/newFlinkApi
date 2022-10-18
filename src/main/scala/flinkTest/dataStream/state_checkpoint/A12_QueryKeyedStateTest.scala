@@ -1,12 +1,10 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
-import org.apache.flink.api.common.functions.{RichFlatMapFunction, RuntimeContext}
-import org.apache.flink.api.common.state.{ListState, ListStateDescriptor, ValueState, ValueStateDescriptor}
+import org.apache.flink.api.common.functions.RichFlatMapFunction
+import org.apache.flink.api.common.state.{ValueState, ValueStateDescriptor}
 import org.apache.flink.api.java.functions.KeySelector
-import org.apache.flink.api.java.tuple.Tuple
-import org.apache.flink.configuration.{Configuration, RestOptions}
-import org.apache.flink.streaming.api.datastream.QueryableStateStream
+import org.apache.flink.configuration.Configuration
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.util.Collector
 

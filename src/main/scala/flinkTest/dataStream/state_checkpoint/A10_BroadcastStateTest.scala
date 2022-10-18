@@ -1,4 +1,4 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
 import org.apache.flink.api.common.state.{MapState, MapStateDescriptor}

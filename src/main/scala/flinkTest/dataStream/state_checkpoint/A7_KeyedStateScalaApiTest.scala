@@ -1,14 +1,8 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
-import org.apache.flink.api.common.functions.{IterationRuntimeContext, RichFlatMapFunction}
-import org.apache.flink.api.common.state.StateTtlConfig.{StateVisibility, UpdateType}
-import org.apache.flink.api.common.state.{StateTtlConfig, ValueState, ValueStateDescriptor}
-import org.apache.flink.api.common.time.Time
-import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.configuration.{Configuration, RestOptions}
 import org.apache.flink.streaming.api.scala._
-import org.apache.flink.util.Collector
 
 /**
  * @Auther: wxf

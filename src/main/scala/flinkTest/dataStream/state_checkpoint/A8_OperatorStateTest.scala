@@ -1,4 +1,4 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import java.sql.{Connection, DriverManager, PreparedStatement}
 
@@ -11,8 +11,8 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource
 import org.apache.flink.streaming.api.environment._
 import org.apache.flink.streaming.api.functions.sink.{RichSinkFunction, SinkFunction}
 
-import scala.collection.mutable.ListBuffer
 import scala.collection.convert.wrapAll._
+import scala.collection.mutable.ListBuffer
 
 /**
  * @Auther: wxf

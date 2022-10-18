@@ -1,8 +1,8 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
 import org.apache.flink.api.common.JobExecutionResult
-import org.apache.flink.api.common.accumulators.{Accumulator, LongCounter}
+import org.apache.flink.api.common.accumulators.LongCounter
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.configuration.{Configuration, RestOptions}
 import org.apache.flink.streaming.api.scala._

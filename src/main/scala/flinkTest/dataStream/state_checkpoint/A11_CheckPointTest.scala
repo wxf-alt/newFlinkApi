@@ -1,4 +1,4 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import java.time.Duration
 

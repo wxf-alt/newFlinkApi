@@ -1,10 +1,10 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import java.time.Duration
 
 import bean.Sensor
 import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
-import org.apache.flink.api.common.functions.{AggregateFunction, RichAggregateFunction}
+import org.apache.flink.api.common.functions.AggregateFunction
 import org.apache.flink.api.common.io.FilePathFilter
 import org.apache.flink.api.java.io.TextInputFormat
 import org.apache.flink.configuration.{Configuration, RestOptions}

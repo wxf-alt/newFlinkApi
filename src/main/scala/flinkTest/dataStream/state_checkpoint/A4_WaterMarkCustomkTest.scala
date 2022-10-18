@@ -1,15 +1,14 @@
-package flinkTest.dataStream
-
+package flinkTest.dataStream.state_checkpoint
 
 import java.text.SimpleDateFormat
-import java.time.{Duration, LocalDateTime}
+import java.time.Duration
 import java.util.Date
 
 import bean.Sensor
-import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, Watermark, WatermarkGenerator, WatermarkGeneratorSupplier, WatermarkOutput, WatermarkStrategy}
+import org.apache.flink.api.common.eventtime._
 import org.apache.flink.configuration.{Configuration, RestOptions}
 import org.apache.flink.streaming.api.scala._
-import org.apache.flink.streaming.api.scala.function.{ProcessWindowFunction, RichProcessWindowFunction}
+import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow

@@ -1,4 +1,4 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import org.apache.flink.api.common.io.FilePathFilter
 import org.apache.flink.api.java.io.TextInputFormat

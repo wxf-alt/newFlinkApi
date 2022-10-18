@@ -1,12 +1,9 @@
-package flinkTest.dataStream
+package flinkTest.dataStream.state_checkpoint
 
 import bean.Sensor
-import org.apache.flink.api.java.functions.KeySelector
 import org.apache.flink.configuration.{Configuration, RestOptions}
-import org.apache.flink.contrib.streaming.state.EmbeddedRocksDBStateBackend
-import org.apache.flink.runtime.state.StateBackend
 import org.apache.flink.runtime.state.hashmap.HashMapStateBackend
-import org.apache.flink.runtime.state.storage.{FileSystemCheckpointStorage, JobManagerCheckpointStorage}
+import org.apache.flink.runtime.state.storage.JobManagerCheckpointStorage
 import org.apache.flink.streaming.api.scala._
 
 /**
