@@ -1,8 +1,9 @@
-//package flinkTest.test
+//package flinkTableApi.test
 //
 //import java.util.Properties
 //
 //import bean.SensorReading
+//import flinkTableApi.bean.SensorReading
 //import org.apache.flink.api.common.functions.RichFlatMapFunction
 //import org.apache.flink.api.common.serialization.SimpleStringSchema
 //import org.apache.flink.api.common.state.{StateTtlConfig, ValueState, ValueStateDescriptor}
@@ -10,6 +11,7 @@
 //import org.apache.flink.api.common.time.Time
 //import org.apache.flink.configuration.{ConfigConstants, Configuration}
 //import org.apache.flink.runtime.state.filesystem.FsStateBackend
+//import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 //import org.apache.flink.streaming.api.scala._
 //import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011
 //import org.apache.flink.util.Collector
@@ -34,7 +36,7 @@
 //    env.setParallelism(8)
 //
 //    // 设置 checkPoint
-//    env.enableCheckpointing(5000)
+//    env.enableCheckpointing(1000)
 //    env.setStateBackend(new FsStateBackend("file:///E:\\A_data\\4.测试数据\\flink-checkPoint\\KafkaSourceDemo"))
 //
 //    // 读取 Kafka
@@ -44,16 +46,24 @@
 //    properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
 //    properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
 //    properties.setProperty("auto.offset.reset", "earliest")
-//    val kafkaInputStream: DataStream[String] = env.addSource(new FlinkKafkaConsumer011[String]("FlinkIdeaSinkTest1", new SimpleStringSchema(), properties))
+//    val flinkKafkaConsumer011: FlinkKafkaConsumer011[String] = new FlinkKafkaConsumer011[String]("FlinkIdeaSinkTest", new SimpleStringSchema(), properties)
+//    // 设置根据程序checkpoint进行offset提交
+//    flinkKafkaConsumer011.setCommitOffsetsOnCheckpoints(true)
+//    // 从提交的 offset 位置开始读取数据
+//    flinkKafkaConsumer011.setStartFromGroupOffsets()
+//    val kafkaInputStream: DataStream[String] = env.addSource(flinkKafkaConsumer011)/*.setParallelism(3)*/
+//    kafkaInputStream.print("kafkaInputStream：")
 //
 //    val mapStream: DataStream[SensorReading] = kafkaInputStream.map(x => {
 //      val str: Array[String] = x.split(",")
 //      // 模拟 复杂处理
 //      val time: Int = new Random().nextInt(10) + 1
 //      Thread.sleep(time * 200)
-//      SensorReading(str(0), str(1).toLong, str(2).toDouble)
+//      SensorReading(str(0), str(1).toLong * 1000, str(2).toDouble)
+//    }).assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor[SensorReading](org.apache.flink.streaming.api.windowing.time.Time.seconds(5)) {
+//      override def extractTimestamp(element: SensorReading) = element.timestamp
 //    })
-//    mapStream.print("mapStream：")
+//    //    mapStream.print("mapStream：").setParallelism(1)
 //
 //    val keyStream: KeyedStream[SensorReading, String] = mapStream.keyBy(_.id)
 //    val flatMapStream: DataStream[(String, Long, Double)] = keyStream.flatMap(new CountWindowAverageTtl())
@@ -98,7 +108,7 @@
 //    sum.update(newSum)
 //    //    println(sum.value()._1 + "-----" + sum.value()._2)
 //
-//    // 如果计数达到2，则发出平均值并清除状态
+//    // 如果计数达到10，则发出平均值并清除状态
 //    // 状态是 实时更新的 下面的 newSum 也可以使用 sum状态 进行计算。
 //    //    因为上面已经将newSum的值更新到状态 sum 中
 //    if (newSum._1 >= 2) {

@@ -1,8 +1,8 @@
-//package flinkTest.test
+//package flinkTableApi.test
 //
 //import java.util.Properties
 //
-//import bean.SensorReading
+//import flinkTableApi.bean.SensorReading
 //import org.apache.flink.api.common.serialization.SimpleStringSchema
 //import org.apache.flink.streaming.api.functions.source.SourceFunction
 //import org.apache.flink.streaming.api.scala._
@@ -19,7 +19,6 @@
 //object KafkaSinkDemo {
 //  def main(args: Array[String]): Unit = {
 //    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
-//    env.setParallelism(1)
 //
 //    val customSource: DataStream[String] = env.addSource(MyFlinkSourceFunction())
 //    val mapStream: DataStream[String] = customSource.map(s => {
@@ -30,9 +29,9 @@
 //    // kafka Producer 配置
 //    val properties: Properties = new Properties()
 //    properties.put("bootstrap.servers", "nn1.hadoop:9092,nn2.hadoop:9092,s1.hadoop:9092")
-//    mapStream.addSink(new FlinkKafkaProducer011[String]("FlinkIdeaSinkTest1", new SimpleStringSchema(), properties)).setParallelism(3)
+//    mapStream.addSink(new FlinkKafkaProducer011[String]("FlinkIdeaSinkTest", new SimpleStringSchema(), properties)).setParallelism(3)
 //
-//    mapStream.print("mapStream：")
+//    mapStream.print("mapStream：").setParallelism(1)
 //    env.execute("KafkaSourceSink")
 //
 //  }
@@ -49,7 +48,7 @@
 //      val id: Int = random.nextInt(10) + 1
 //      val temp: String = (random.nextDouble() * 99 + 1).formatted("%.2f") // 保留2位小数
 //      val timeMillis: Long = System.currentTimeMillis()
-//      Thread.sleep(id * 100)
+//      Thread.sleep(id * 200)
 //      ctx.collect(s"sensor_${id}" + "-" + timeMillis + "-" + temp)
 //    }
 //  }

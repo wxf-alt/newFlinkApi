@@ -22,6 +22,7 @@ object A1_MySource {
     //        if (x > 5) (x, "大于5") else (x, "小于5")
     //      }
     //    }
+
     import org.apache.flink.streaming.api.scala.extensions._
 
     // mapWith
