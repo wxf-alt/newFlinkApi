@@ -1,7 +1,10 @@
 package flinkTest.test
 
-import bean.Sensor
-import com.alibaba.fastjson.JSON
+import java.util
+
+import bean.{Sensor, SensorJava}
+import com.alibaba.fastjson.{JSON, JSONObject}
+import com.alibaba.fastjson.serializer.SerializeFilter
 
 /**
  * @Auther: wxf
@@ -22,18 +25,23 @@ object JsonTest {
     //    println(temp1)
 
     // 对象 转换 Json   使用 fastjson工具实现Json转换
+    // 必须要 添加 @BeanProperty 用于 JSON 转换 对象  或者 使用Java类
     val str: String = """{"id":"sensor_1","temperature":35.8,"timestamp":1547718199000}"""
 
-    //    val reading1: JSONObject = JSON.parseObject(str)
+    //    val reading1: Sensor = JSON.parseObject(str, classOf[Sensor])
+    //    val reading1: SensorJava = JSON.parseObject(str, classOf[SensorJava])
+
+    val reading1: JSONObject = JSON.parseObject(str)
     //    val id: String = reading1.getString("id")
     //    val timeStamp: Long = reading1.getLong("timeStamp")
     //    val temperature: Double = reading1.getDouble("temperature")
     //    val sensor: Sensor = Sensor(id, timeStamp, temperature)
-    val reading1: Sensor = JSON.parseObject(str, classOf[Sensor])
 
-    //    val strs: String = JSON.toJSONString(reading1, null.asInstanceOf[Array[SerializeFilter]])
-    //    println(reading1)
-    //    println(strs)
+    val strs: String = JSON.toJSONString(reading1, null.asInstanceOf[Array[SerializeFilter]])
+    val str1: String = JSON.toJSONString(reading1, true)
+    println(reading1)
+    println(strs)
+    println(str1)
 
     //    // scala 自带 Json4s工具
     //    val reading: Sensor = new Sensor("sensor_1", 1547718199000L, 35.8)

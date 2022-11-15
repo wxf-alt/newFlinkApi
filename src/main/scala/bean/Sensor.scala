@@ -1,6 +1,5 @@
 package bean
 
-import scala.beans.BeanProperty
 
 /**
  * @Auther: wxf
@@ -12,6 +11,7 @@ case class Sensor(id: String, timeStamp: Long, temperature: Double)
 
 //// 定义样例类，传感器id，时间戳，温度
 //// 添加 @BeanProperty 用于 JSON 转换 对象
-//case class Sensor(@BeanProperty id: String, @BeanProperty timestamp: Long, @BeanProperty temperature: Double) {
-//  override def toString: String = s"id：${id},timestamp：${timestamp}，temperature：${temperature}"
+//@BeanProperty
+//case class Sensor(@BeanProperty id: String, @BeanProperty timeStamp: Long, @BeanProperty temperature: Double) {
+//  override def toString: String = s"id：${id},timestamp：${timeStamp}，temperature：${temperature}"
 //}

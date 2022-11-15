@@ -18,14 +18,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--    MySql   -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.46</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!--Flink  DataStream 1.15.2-->
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
         <dependency>
@@ -69,17 +61,6 @@
             <version>1.15.2</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka</artifactId>
-            <version>1.15.2</version>
-        </dependency>
-        <!--                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka &ndash;&gt;-->
-        <!--                <dependency>-->
-        <!--                    <groupId>org.apache.flink</groupId>-->
-        <!--                    <artifactId>flink-connector-kafka_2.12</artifactId>-->
-        <!--                    <version>1.12.5</version>-->
-        <!--                </dependency>-->
 
         <!--  Flink Table API  1.14.4 -->
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner -->
@@ -101,7 +82,129 @@
         </dependency>
 
 
+        <!--        Kafka       -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-base</artifactId>
+            <version>1.15.2</version>
+        </dependency>
 
+<!--        &lt;!&ndash;        JDBC         &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.flink</groupId>-->
+<!--            <artifactId>flink-connector-jdbc</artifactId>-->
+<!--            <version>1.15.2</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-jdbc -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-jdbc_2.12</artifactId>
+            <version>1.14.6</version>
+        </dependency>
+        <!--    MySql 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <!--        Elasticsearch       -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-elasticsearch7</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+
+        <!--        Redis       -->
+        <dependency>
+            <groupId>org.apache.bahir</groupId>
+            <artifactId>flink-connector-redis_2.12</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <!--        Flumn       -->
+        <dependency>
+            <groupId>org.apache.bahir</groupId>
+            <artifactId>flink-connector-flume_2.12</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <!--       Text files        -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-files</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--        CSV     -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-csv</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--        ORC      -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-orc</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--        Avro format    -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-avro</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--        Sequence         -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-sequence-file</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <!--      Parquet         -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-parquet</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.parquet</groupId>
+            <artifactId>parquet-avro</artifactId>
+            <version>1.12.2</version>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>it.unimi.dsi</groupId>
+                    <artifactId>fastutil</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!--        Hadoop    -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-hadoop-compatibility_2.12</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.8.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!--        Json    -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

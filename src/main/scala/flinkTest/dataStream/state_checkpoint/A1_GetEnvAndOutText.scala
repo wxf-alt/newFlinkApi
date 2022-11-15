@@ -29,9 +29,10 @@ object A1_GetEnvAndOutText {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
     env.setParallelism(1)
 
-    val path: String = ClassLoader.getSystemResource("log4j.properties").getPath
-    println(path)
-    val text: DataStream[String] = env.readTextFile(path)
+//    val path: String = ClassLoader.getSystemResource("log4j.properties").getPath
+//    println(path)
+    val text: DataStream[String] = env.socketTextStream("localhost", 6666)
+//    val text: DataStream[String] = env.readTextFile(path)
     val mapStream: DataStream[String] = text.map(x => {
       val str: Array[String] = x.split("=")
       str(0)
