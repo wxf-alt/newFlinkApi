@@ -24,24 +24,29 @@ object A5_WriteParquetFile {
     env.setParallelism(1)
 
     env.enableCheckpointing(5000)
+    env.disableOperatorChaining()
 
-    //    val inputStream: DataStream[String] = env.socketTextStream("localhost", 6666)
-    val inputStream: DataStream[String] = env.addSource(new MySource())
+    val inputStream: DataStream[String] = env.socketTextStream("localhost", 6666).name("source").setDescription("socket source")
+    //    val inputStream: DataStream[String] = env.addSource(new MySource())
+    //      .name("source").setDescription("自定义 source")
+
     // 使用 Map 算子
     val mapStream: DataStream[ParquetTest] = inputStream
       .map(x => {
         val str: Array[String] = x.split(" ")
+        Thread.sleep(1000L)
         ParquetTest(str(0), str(1).toInt * 2)
-      })
-    inputStream.print("inputStream：")
+      }).name("map").setDescription("格式化 输入数据")
+    mapStream.print("inputStream：").name("print").setDescription("输出数据 控制台")
 
-    val streamingFileSink: StreamingFileSink[ParquetTest] = StreamingFileSink.forBulkFormat(new Path("E:\\A_data\\4.测试数据\\flink数据\\Parquet输出"),
-      AvroParquetWriters.forReflectRecord(classOf[ParquetTest])
-    ).withBucketCheckInterval(10000)
-      .withRollingPolicy(OnCheckpointRollingPolicy.build())
-      .build()
+    //    val streamingFileSink: StreamingFileSink[ParquetTest] = StreamingFileSink.forBulkFormat(new Path("E:\\A_data\\4.测试数据\\flink数据\\Parquet输出"),
+    //      AvroParquetWriters.forReflectRecord(classOf[ParquetTest])
+    //    ).withBucketCheckInterval(10000)
+    //      .withRollingPolicy(OnCheckpointRollingPolicy.build())
+    //      .build()
 
-    mapStream.addSink(streamingFileSink)
+    //    mapStream.addSink(streamingFileSink)
+    //      .name("addSink").setDescription("添加Sink 输出文件")
 
     env.execute("A5_WriteParquetFile")
   }
