@@ -32,7 +32,7 @@ object A1_ProcessFunctionSensorTest {
     }).keyBy("id")
       .process(new MyKeyedProcessFuntion(5000L))
 
-    warningStream.print()
+//    warningStream.print()
 
     environment.execute("A1_ProcessFunctionSensorTest")
   }
